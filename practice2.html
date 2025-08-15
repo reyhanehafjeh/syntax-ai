@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آنلاین مدرن - بهترین فروشگاه ایران</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 3s infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.6); }
+        }
+        
+        .bounce-in {
+            animation: bounceIn 0.6s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .category-active {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .floating-cart {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ef4444;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .price-badge {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .discount-badge {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-xl sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <!-- Top Bar -->
+            <div class="flex justify-between items-center py-3 text-sm text-gray-600 border-b border-gray-100">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-2">📞 پشتیبانی ۲۴ ساعته: ۰۲۱-۱۲۳۴۵۶۷۸</span>
+                    <span class="flex items-center gap-2">🚚 ارسال رایگان برای خرید بالای ۵۰۰ هزار تومان</span>
+                    <span class="flex items-center gap-2">⚡ تحویل اکسپرس در تهران</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hover:text-red-500 transition-colors">ورود</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#" class="hover:text-red-500 transition-colors">ثبت نام</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#" class="hover:text-red-500 transition-colors">پیگیری سفارش</a>
+                </div>
+            </div>
+            
+            <!-- Main Header -->
+            <div class="flex items-center justify-between py-5">
+                <div class="flex items-center gap-8">
+                    <div class="gradient-bg text-white px-8 py-3 rounded-xl font-bold text-2xl pulse-glow">
+                        🛍️ فروشگاه مدرن
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="relative flex-1 max-w-lg">
+                        <input type="text" id="searchInput" placeholder="جستجو در میان میلیون‌ها کالا..." 
+                               class="w-full px-6 py-4 pr-14 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all">
+                        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-500 transition-colors">
+                            🔍
+                        </button>
+                        <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg mt-1 hidden shadow-lg z-50"></div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <button class="flex items-center gap-2 text-gray-700 hover:text-red-500 transition-colors">
+                        ❤️ علاقه‌مندی‌ها
+                        <span class="bg-red-100 text-red-600 rounded-full px-2 py-1 text-xs font-bold">۳</span>
+                    </button>
+                    <button class="flex items-center gap-2 text-gray-700 hover:text-red-500 transition-colors">
+                        📊 مقایسه محصولات
+                        <span class="bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-bold">۲</span>
+                    </button>
+                    <button id="cartBtn" class="flex items-center gap-3 bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600 transition-all shadow-lg">
+                        🛒 سبد خرید
+                        <span id="cartCount" class="bg-white text-red-500 rounded-full px-3 py-1 text-sm font-bold">0</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="py-4 border-t border-gray-100">
+                <ul class="flex items-center gap-8">
+                    <li><a href="#home" class="text-red-500 font-semibold border-b-2 border-red-500 pb-1">صفحه اصلی</a></li>
+                    <li><a href="#categories" class="hover:text-red-500 transition-colors">دسته‌بندی‌ها</a></li>
+                    <li><a href="#featured" class="hover:text-red-500 transition-colors">محصولات ویژه</a></li>
+                    <li><a href="#bestsellers" class="hover:text-red-500 transition-colors">پرفروش‌ترین‌ها</a></li>
+                    <li><a href="#new" class="hover:text-red-500 transition-colors">جدیدترین‌ها</a></li>
+                    <li><a href="#brands" class="hover:text-red-500 transition-colors">برندها</a></li>
+                    <li><a href="#offers" class="hover:text-red-500 transition-colors">تخفیف‌ها</a></li>
+                    <li><a href="#reviews" class="hover:text-red-500 transition-colors">نظرات مشتریان</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <h1 class="text-6xl font-bold mb-8 leading-tight">بهترین فروشگاه آنلاین ایران</h1>
+                    <p class="text-2xl mb-10 opacity-90 leading-relaxed">میلیون‌ها کالای اصل با بهترین قیمت، ارسال سریع و گارانتی معتبر</p>
+                    <div class="flex flex-wrap gap-6">
+                        <button class="bg-white text-red-500 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all shadow-lg pulse-glow">
+                            🚀 شروع خرید
+                        </button>
+                        <button class="border-2 border-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-red-500 transition-all">
+                            💰 مشاهده تخفیف‌ها
+                        </button>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-8 mt-12">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">+۲M</div>
+                            <div class="text-sm opacity-80">محصول</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">+۵۰۰K</div>
+                            <div class="text-sm opacity-80">مشتری راضی</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">۲۴/۷</div>
+                            <div class="text-sm opacity-80">پشتیبانی</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide-in-right">
+                    <div class="bg-white/15 backdrop-blur-lg rounded-3xl p-10 border border-white/20">
+                        <h3 class="text-3xl font-bold mb-6">🎉 پیشنهاد ویژه امروز</h3>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between items-center">
+                                <span>تا ۷۰٪ تخفیف روی لپ‌تاپ‌ها</span>
+                                <span class="price-badge">فعال</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>ارسال رایگان تمام سفارش‌ها</span>
+                                <span class="price-badge">رایگان</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>گارانتی ۲ ساله</span>
+                                <span class="price-badge">ضمانت</span>
+                            </div>
+                        </div>
+                        <div class="bg-white text-red-500 rounded-xl p-6 font-bold text-center text-xl">
+                            کد تخفیف: MODERN70
+                        </div>
+                        <div class="text-center mt-4 text-sm opacity-80">
+                            ⏰ تا پایان امروز فرصت باقی مانده
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">دسته‌بندی‌های محبوب</h2>
+                <p class="text-gray-600 text-lg">انتخاب از میان هزاران محصول در دسته‌بندی‌های مختلف</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-12">
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="mobile">
+                    <div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">📱</div>
+                    <h3 class="font-semibold">موبایل</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۱۲۰۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="laptop">
+                    <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">💻</div>
+                    <h3 class="font-semibold">لپ‌تاپ</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۸۵۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="clothing">
+                    <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">👕</div>
+                    <h3 class="font-semibold">پوشاک</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۳۲۰۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="home">
+                    <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">🏠</div>
+                    <h3 class="font-semibold">خانه</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۱۸۰۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="beauty">
+                    <div class="bg-gradient-to-br from-pink-100 to-pink-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">💄</div>
+                    <h3 class="font-semibold">زیبایی</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۹۵۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="gaming">
+                    <div class="bg-gradient-to-br from-red-100 to-red-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">🎮</div>
+                    <h3 class="font-semibold">گیمینگ</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۶۷۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="sports">
+                    <div class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">⚽</div>
+                    <h3 class="font-semibold">ورزش</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۱۱۰۰ محصول</p>
+                </div>
+                <div class="category-item text-center card-hover cursor-pointer p-4 rounded-xl" data-category="books">
+                    <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">📚</div>
+                    <h3 class="font-semibold">کتاب</h3>
+                    <p class="text-xs text-gray-500 mt-1">+۲۵۰۰ محصول</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-4xl font-bold mb-2">محصولات</h2>
+                    <p class="text-gray-600" id="categoryTitle">همه محصولات</p>
+                </div>
+                <div class="flex gap-4">
+                    <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
+                        <option value="default">مرتب‌سازی پیش‌فرض</option>
+                        <option value="price-low">قیمت: کم به زیاد</option>
+                        <option value="price-high">قیمت: زیاد به کم</option>
+                        <option value="rating">بالاترین امتیاز</option>
+                        <option value="newest">جدیدترین</option>
+                    </select>
+                    <div class="flex border border-gray-300 rounded-lg overflow-hidden">
+                        <button id="gridView" class="px-4 py-2 bg-red-500 text-white">⊞</button>
+                        <button id="listView" class="px-4 py-2 hover:bg-gray-100">☰</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="loadingSpinner" class="text-center py-12 hidden">
+                <div class="loading-spinner mx-auto mb-4"></div>
+                <p class="text-gray-600">در حال بارگذاری محصولات...</p>
+            </div>
+            
+            <div id="productsGrid" class="product-grid">
+                <!-- Products will be loaded here -->
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="bg-red-500 text-white px-8 py-3 rounded-xl hover:bg-red-600 transition-all font-semibold">
+                    مشاهده محصولات بیشتر
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">محصولات ویژه</h2>
+                <p class="text-gray-600 text-lg">منتخبی از بهترین محصولات با تخفیف‌های ویژه</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-2xl p-8 h-full flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4">پیشنهاد ویژه هفته</h3>
+                            <p class="text-xl mb-6 opacity-90">گوشی iPhone 15 Pro Max</p>
+                            <div class="flex items-center gap-4 mb-6">
+                                <span class="text-4xl font-bold">۵۵,۰۰۰,۰۰۰</span>
+                                <span class="text-lg line-through opacity-70">۶۵,۰۰۰,۰۰۰</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="bg-white text-red-500 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-all">
+                                مشاهده محصول
+                            </button>
+                            <div class="text-6xl opacity-20">📱</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-blue-50 rounded-xl p-6 card-hover cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="text-4xl">💻</div>
+                            <div>
+                                <h4 class="font-bold text-lg">لپ‌تاپ MacBook Pro</h4>
+                                <p class="text-blue-600 font-bold">۴۸,۰۰۰,۰۰۰ تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 rounded-xl p-6 card-hover cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="text-4xl">🎧</div>
+                            <div>
+                                <h4 class="font-bold text-lg">هدفون AirPods Pro</h4>
+                                <p class="text-green-600 font-bold">۸,۵۰۰,۰۰۰ تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-purple-50 rounded-xl p-6 card-hover cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="text-4xl">⌚</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Apple Watch Series 9</h4>
+                                <p class="text-purple-600 font-bold">۱۵,۲۰۰,۰۰۰ تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-orange-50 rounded-xl p-6 card-hover cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="text-4xl">📷</div>
+                            <div>
+                                <h4 class="font-bold text-lg">دوربین Canon EOS R5</h4>
+                                <p class="text-orange-600 font-bold">۱۲۵,۰۰۰,۰۰۰ تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section id="brands" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">برندهای معتبر</h2>
+                <p class="text-gray-600 text-lg">همکاری با بهترین برندهای دنیا</p>
+            </div>
+            
+            <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-8">
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">🍎</div>
+                    <p class="font-semibold text-sm">Apple</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">📱</div>
+                    <p class="font-semibold text-sm">Samsung</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">🖥️</div>
+                    <p class="font-semibold text-sm">Dell</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">💻</div>
+                    <p class="font-semibold text-sm">HP</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">🎮</div>
+                    <p class="font-semibold text-sm">Sony</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">🔧</div>
+                    <p class="font-semibold text-sm">Bosch</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">👟</div>
+                    <p class="font-semibold text-sm">Nike</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 card-hover cursor-pointer text-center">
+                    <div class="text-3xl mb-2">👕</div>
+                    <p class="font-semibold text-sm">Adidas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section id="reviews" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">نظرات مشتریان</h2>
+                <p class="text-gray-600 text-lg">تجربه خرید مشتریان ما از فروشگاه مدرن</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ع</div>
+                        <div>
+                            <h4 class="font-bold text-lg">علی احمدی</h4>
+                            <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">"خرید من از این فروشگاه فوق‌العاده بود. کیفیت محصولات عالی، ارسال سریع و پشتیبانی بی‌نظیر. حتماً دوباره خرید می‌کنم و به دوستانم هم پیشنهاد می‌دهم."</p>
+                    <div class="mt-4 text-sm text-gray-500">خرید: گوشی سامسونگ Galaxy S24</div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-xl">س</div>
+                        <div>
+                            <h4 class="font-bold text-lg">سارا محمدی</h4>
+                            <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">"پشتیبانی عالی و قیمت‌های مناسب. سایت خیلی راحت و کاربردی طراحی شده. تجربه خریدم واقعاً لذت‌بخش بود. ممنون از تیم فروشگاه مدرن."</p>
+                    <div class="mt-4 text-sm text-gray-500">خرید: لپ‌تاپ ایسوس VivoBook</div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl">م</div>
+                        <div>
+                            <h4 class="font-bold text-lg">محمد رضایی</h4>
+                            <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">"تنوع محصولات زیاد و کیفیت بسیار خوب. قیمت‌ها رقابتی و ارسال سریع. از خرید چندین محصول کاملاً راضی هستم. فروشگاه قابل اعتمادی است."</p>
+                    <div class="mt-4 text-sm text-gray-500">خرید: هدفون بی‌سیم سونی</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <div class="inline-flex items-center gap-8 bg-gray-50 rounded-2xl px-12 py-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-red-500">۴.۸</div>
+                        <div class="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</div>
+                        <div class="text-sm text-gray-600">امتیاز کلی</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-blue-500">+۱۰K</div>
+                        <div class="text-sm text-gray-600">نظر مشتریان</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-green-500">۹۸٪</div>
+                        <div class="text-sm text-gray-600">رضایت مشتریان</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
+                <div class="lg:col-span-2">
+                    <div class="gradient-bg text-white px-6 py-3 rounded-xl font-bold text-2xl inline-block mb-6">
+                        🛍️ فروشگاه مدرن
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">بهترین فروشگاه آنلاین ایران با بیش از ۱۰ سال تجربه در ارائه محصولات باکیفیت و خدمات مطلوب به مشتریان عزیز</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">📘</a>
+                        <a href="#" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">📷</a>
+                        <a href="#" class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">🐦</a>
+                        <a href="#" class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">📺</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-xl mb-6">خدمات مشتریان</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">پاسخ به سوالات متداول</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">رویه‌های بازگرداندن کالا</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">شرایط استفاده</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">حریم خصوصی</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">گزارش تخلف</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-xl mb-6">راهنمای خرید</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">نحوه ثبت سفارش</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">رویه ارسال سفارش</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">شیوه‌های پرداخت</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">پیگیری سفارش</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">ضمانت بازگشت وجه</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-xl mb-6">تماس با ما</h4>
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-center gap-3">
+                            <span class="text-red-400">📞</span>
+                            <span>۰۲۱-۱۲۳۴۵۶۷۸</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-red-400">📧</span>
+                            <span>info@modernshop.ir</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-red-400">📍</span>
+                            <span>تهران، خیابان ولیعصر، پلاک ۱۲۳</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-red-400">🕐</span>
+                            <span>پاسخگویی ۲۴ ساعته</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-gray-400">&copy; ۱۴۰۳ فروشگاه مدرن. تمامی حقوق محفوظ است.</p>
+                    <div class="flex items-center gap-6 text-sm text-gray-400">
+                        <span>🔒 پرداخت امن</span>
+                        <span>🚚 ارسال سریع</span>
+                        <span>✅ ضمانت اصالت کالا</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Cart -->
+    <div class="floating-cart">
+        <button id="floatingCartBtn" class="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-red-600 transition-all pulse-glow">
+            🛒
+            <span id="floatingCartCount" class="absolute -top-2 -right-2 bg-white text-red-500 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">0</span>
+        </button>
+    </div>
+
+    <!-- Modals -->
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 id="modalTitle" class="text-3xl font-bold"></h2>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div>
+                        <div class="text-center mb-6">
+                            <div id="modalIcon" class="text-9xl mb-6"></div>
+                            <div class="flex gap-3 justify-center">
+                                <div class="w-20 h-20 bg-gray-200 rounded-lg border-2 border-red-500 flex items-center justify-center text-2xl cursor-pointer">📷</div>
+                                <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center text-2xl cursor-pointer">📷</div>
+                                <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center text-2xl cursor-pointer">📷</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="mb-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="text-yellow-400 text-xl">⭐⭐⭐⭐⭐</span>
+                                <span class="text-gray-500">(۱۲۳ نظر)</span>
+                                <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-semibold">موجود</span>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed mb-6">این محصول با کیفیت بالا و گارانتی معتبر ارائه می‌شود. مناسب برای استفاده روزمره و دارای تکنولوژی پیشرفته.</p>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="text-4xl font-bold text-red-500" id="modalPrice"></span>
+                                <span class="text-2xl">تومان</span>
+                                <span class="text-lg text-gray-500 line-through" id="modalOldPrice"></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-semibold">۱۵٪ تخفیف</span>
+                                <span class="text-sm text-gray-500">تا پایان هفته</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-500">✅</span>
+                                <span>گارانتی ۱۸ ماهه</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-500">✅</span>
+                                <span>ارسال رایگان</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-500">✅</span>
+                                <span>۷ روز ضمانت بازگشت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 mb-8">
+                            <button id="modalAddToCart" class="flex-1 bg-red-500 text-white py-4 rounded-xl hover:bg-red-600 font-bold text-lg transition-all">
+                                افزودن به سبد خرید
+                            </button>
+                            <button class="px-6 py-4 border-2 border-red-500 text-red-500 rounded-xl hover:bg-red-50 transition-all">
+                                ❤️
+                            </button>
+                            <button class="px-6 py-4 border-2 border-gray-300 text-gray-600 rounded-xl hover:bg-gray-50 transition-all">
+                                📊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Products -->
+                <div class="border-t pt-8 mt-8">
+                    <h3 class="text-2xl font-bold mb-6">محصولات مرتبط</h3>
+                    <div id="relatedProducts" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- Related products will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold">سبد خرید</h2>
+                    <button onclick="closeCartModal()" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
+                </div>
+                
+                <div id="cartItems" class="space-y-6 mb-8">
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🛒</div>
+                        <p class="text-gray-500 text-lg">سبد خرید شما خالی است</p>
+                        <button onclick="closeCartModal()" class="mt-4 text-red-500 hover:text-red-600 font-semibold">ادامه خرید</button>
+                    </div>
+                </div>
+                
+                <div id="cartSummary" class="border-t pt-6 hidden">
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between">
+                            <span>جمع کل:</span>
+                            <span id="subtotal">۰ تومان</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>هزینه ارسال:</span>
+                            <span class="text-green-600">رایگان</span>
+                        </div>
+                        <div class="flex justify-between text-xl font-bold">
+                            <span>مبلغ نهایی:</span>
+                            <span id="totalAmount" class="text-red-500">۰ تومان</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <button class="w-full bg-red-500 text-white py-4 rounded-xl hover:bg-red-600 font-bold text-lg transition-all">
+                            تکمیل خرید
+                        </button>
+                        <button onclick="closeCartModal()" class="w-full border-2 border-gray-300 py-4 rounded-xl hover:bg-gray-50 font-semibold transition-all">
+                            ادامه خرید
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">✅</span>
+            <span id="notificationText">محصول به سبد خرید اضافه شد!</span>
+        </div>
+    </div>
+
+    <script>
+        // Product Database
+        const products = {
+            mobile: [
+                { id: 1, name: 'گوشی سامسونگ Galaxy S24 Ultra', price: '۴۵,۰۰۰,۰۰۰', oldPrice: '۵۰,۰۰۰,۰۰۰', icon: '📱', rating: 5, category: 'mobile', discount: 10 },
+                { id: 2, name: 'گوشی آیفون ۱۵ پرو مکس', price: '۵۵,۰۰۰,۰۰۰', oldPrice: '۶۰,۰۰۰,۰۰۰', icon: '📱', rating: 5, category: 'mobile', discount: 8 },
+                { id: 3, name: 'گوشی شیائومی ۱۴ پرو', price: '۲۸,۰۰۰,۰۰۰', oldPrice: '۳۲,۰۰۰,۰۰۰', icon: '📱', rating: 4, category: 'mobile', discount: 12 },
+                { id: 4, name: 'گوشی هواوی P60 Pro', price: '۳۵,۰۰۰,۰۰۰', oldPrice: '۴۰,۰۰۰,۰۰۰', icon: '📱', rating: 4, category: 'mobile', discount: 12 },
+                { id: 5, name: 'گوشی وان پلاس ۱۲', price: '۳۲,۰۰۰,۰۰۰', oldPrice: '۳۶,۰۰۰,۰۰۰', icon: '📱', rating: 4, category: 'mobile', discount: 11 },
+                { id: 6, name: 'گوشی گوگل پیکسل ۸ پرو', price: '۴۲,۰۰۰,۰۰۰', oldPrice: '۴۶,۰۰۰,۰۰۰', icon: '📱', rating: 5, category: 'mobile', discount: 9 }
+            ],
+            laptop: [
+                { id: 7, name: 'لپ‌تاپ MacBook Pro M3', price: '۸۵,۰۰۰,۰۰۰', oldPrice: '۹۰,۰۰۰,۰۰۰', icon: '💻', rating: 5, category: 'laptop', discount: 6 },
+                { id: 8, name: 'لپ‌تاپ ایسوس ROG Strix', price: '۴۵,۰۰۰,۰۰۰', oldPrice: '۵۰,۰۰۰,۰۰۰', icon: '💻', rating: 5, category: 'laptop', discount: 10 },
+                { id: 9, name: 'لپ‌تاپ دل XPS 13', price: '۳۸,۰۰۰,۰۰۰', oldPrice: '۴۲,۰۰۰,۰۰۰', icon: '💻', rating: 4, category: 'laptop', discount: 10 },
+                { id: 10, name: 'لپ‌تاپ HP Pavilion', price: '۲۵,۰۰۰,۰۰۰', oldPrice: '۲۸,۰۰۰,۰۰۰', icon: '💻', rating: 4, category: 'laptop', discount: 11 },
+                { id: 11, name: 'لپ‌تاپ لنوو ThinkPad', price: '۳۵,۰۰۰,۰۰۰', oldPrice: '۳۹,۰۰۰,۰۰۰', icon: '💻', rating: 4, category: 'laptop', discount: 10 },
+                { id: 12, name: 'لپ‌تاپ MSI Gaming', price: '۵۲,۰۰۰,۰۰۰', oldPrice: '۵۸,۰۰۰,۰۰۰', icon: '💻', rating: 5, category: 'laptop', discount: 10 }
+            ],
+            clothing: [
+                { id: 13, name: 'تی‌شرت نایک اسپرت', price: '۱,۲۰۰,۰۰۰', oldPrice: '۱,۵۰۰,۰۰۰', icon: '👕', rating: 4, category: 'clothing', discount: 20 },
+                { id: 14, name: 'شلوار جین لیوایز', price: '۲,۸۰۰,۰۰۰', oldPrice: '۳,۲۰۰,۰۰۰', icon: '👖', rating: 4, category: 'clothing', discount: 12 },
+                { id: 15, name: 'کفش ورزشی آدیداس', price: '۴,۵۰۰,۰۰۰', oldPrice: '۵,۰۰۰,۰۰۰', icon: '👟', rating: 5, category: 'clothing', discount: 10 },
+                { id: 16, name: 'کاپشن زمستانی', price: '۶,۲۰۰,۰۰۰', oldPrice: '۷,۰۰۰,۰۰۰', icon: '🧥', rating: 4, category: 'clothing', discount: 11 },
+                { id: 17, name: 'پیراهن مجلسی', price: '۳,۵۰۰,۰۰۰', oldPrice: '۴,۰۰۰,۰۰۰', icon: '👔', rating: 4, category: 'clothing', discount: 12 },
+                { id: 18, name: 'کیف دستی چرمی', price: '۲,۲۰۰,۰۰۰', oldPrice: '۲,۶۰۰,۰۰۰', icon: '👜', rating: 4, category: 'clothing', discount: 15 }
+            ],
+            home: [
+                { id: 19, name: 'یخچال فریزر سامسونگ', price: '۲۸,۰۰۰,۰۰۰', oldPrice: '۳۲,۰۰۰,۰۰۰', icon: '🏠', rating: 5, category: 'home', discount: 12 },
+                { id: 20, name: 'ماشین لباسشویی ال‌جی', price: '۱۸,۵۰۰,۰۰۰', oldPrice: '۲۱,۰۰۰,۰۰۰', icon: '🏠', rating: 4, category: 'home', discount: 12 },
+                { id: 21, name: 'تلویزیون ۵۵ اینچ سونی', price: '۳۵,۰۰۰,۰۰۰', oldPrice: '۴۰,۰۰۰,۰۰۰', icon: '📺', rating: 5, category: 'home', discount: 12 },
+                { id: 22, name: 'کولر گازی اسپلیت', price: '۱۵,۰۰۰,۰۰۰', oldPrice: '۱۷,۰۰۰,۰۰۰', icon: '❄️', rating: 4, category: 'home', discount: 12 },
+                { id: 23, name: 'مبل راحتی ۷ نفره', price: '۲۵,۰۰۰,۰۰۰', oldPrice: '۲۸,۰۰۰,۰۰۰', icon: '🛋️', rating: 4, category: 'home', discount: 11 },
+                { id: 24, name: 'میز ناهارخوری چوبی', price: '۸,۵۰۰,۰۰۰', oldPrice: '۱۰,۰۰۰,۰۰۰', icon: '🪑', rating: 4, category: 'home', discount: 15 }
+            ],
+            beauty: [
+                { id: 25, name: 'کرم ضد آفتاب SPF50', price: '۴۵۰,۰۰۰', oldPrice: '۵۵۰,۰۰۰', icon: '💄', rating: 4, category: 'beauty', discount: 18 },
+                { id: 26, name: 'شامپو تقویت کننده مو', price: '۳۲۰,۰۰۰', oldPrice: '۴۰۰,۰۰۰', icon: '🧴', rating: 4, category: 'beauty', discount: 20 },
+                { id: 27, name: 'رژ لب مات', price: '۲۸۰,۰۰۰', oldPrice: '۳۵۰,۰۰۰', icon: '💋', rating: 4, category: 'beauty', discount: 20 },
+                { id: 28, name: 'کرم مرطوب کننده صورت', price: '۶۸۰,۰۰۰', oldPrice: '۸۰۰,۰۰۰', icon: '🧴', rating: 5, category: 'beauty', discount: 15 },
+                { id: 29, name: 'ماسک صورت طبیعی', price: '۱۲۰,۰۰۰', oldPrice: '۱۵۰,۰۰۰', icon: '🎭', rating: 4, category: 'beauty', discount: 20 },
+                { id: 30, name: 'عطر زنانه لوکس', price: '۲,۸۰۰,۰۰۰', oldPrice: '۳,۲۰۰,۰۰۰', icon: '🌸', rating: 5, category: 'beauty', discount: 12 }
+            ],
+            gaming: [
+                { id: 31, name: 'کنسول PlayStation 5', price: '۲۸,۰۰۰,۰۰۰', oldPrice: '۳۲,۰۰۰,۰۰۰', icon: '🎮', rating: 5, category: 'gaming', discount: 12 },
+                { id: 32, name: 'کنسول Xbox Series X', price: '۲۵,۰۰۰,۰۰۰', oldPrice: '۲۸,۰۰۰,۰۰۰', icon: '🎮', rating: 5, category: 'gaming', discount: 11 },
+                { id: 33, name: 'دسته بازی بی‌سیم', price: '۲,۸۰۰,۰۰۰', oldPrice: '۳,۲۰۰,۰۰۰', icon: '🕹️', rating: 4, category: 'gaming', discount: 12 },
+                { id: 34, name: 'هدست گیمینگ', price: '۳,۵۰۰,۰۰۰', oldPrice: '۴,۰۰۰,۰۰۰', icon: '🎧', rating: 5, category: 'gaming', discount: 12 },
+                { id: 35, name: 'کیبورد مکانیکی RGB', price: '۴,۲۰۰,۰۰۰', oldPrice: '۴,۸۰۰,۰۰۰', icon: '⌨️', rating: 5, category: 'gaming', discount: 12 },
+                { id: 36, name: 'ماوس گیمینگ حرفه‌ای', price: '۱,۸۰۰,۰۰۰', oldPrice: '۲,۲۰۰,۰۰۰', icon: '🖱️', rating: 4, category: 'gaming', discount: 18 }
+            ],
+            sports: [
+                { id: 37, name: 'دوچرخه کوهستان', price: '۱۲,۰۰۰,۰۰۰', oldPrice: '۱۴,۰۰۰,۰۰۰', icon: '🚴', rating: 4, category: 'sports', discount: 14 },
+                { id: 38, name: 'توپ فوتبال حرفه‌ای', price: '۸۵۰,۰۰۰', oldPrice: '۱,۰۰۰,۰۰۰', icon: '⚽', rating: 4, category: 'sports', discount: 15 },
+                { id: 39, name: 'دمبل قابل تنظیم', price: '۲,۵۰۰,۰۰۰', oldPrice: '۳,۰۰۰,۰۰۰', icon: '🏋️', rating: 5, category: 'sports', discount: 17 },
+                { id: 40, name: 'تردمیل خانگی', price: '۱۸,۰۰۰,۰۰۰', oldPrice: '۲۱,۰۰۰,۰۰۰', icon: '🏃', rating: 4, category: 'sports', discount: 14 },
+                { id: 41, name: 'کیسه بوکس', price: '۱,۲۰۰,۰۰۰', oldPrice: '۱,۵۰۰,۰۰۰', icon: '🥊', rating: 4, category: 'sports', discount: 20 },
+                { id: 42, name: 'راکت تنیس حرفه‌ای', price: '۳,۸۰۰,۰۰۰', oldPrice: '۴,۵۰۰,۰۰۰', icon: '🎾', rating: 5, category: 'sports', discount: 16 }
+            ],
+            books: [
+                { id: 43, name: 'کتاب برنامه‌نویسی پایتون', price: '۲۸۰,۰۰۰', oldPrice: '۳۵۰,۰۰۰', icon: '📚', rating: 5, category: 'books', discount: 20 },
+                { id: 44, name: 'رمان عاشقانه', price: '۱۲۰,۰۰۰', oldPrice: '۱۵۰,۰۰۰', icon: '📖', rating: 4, category: 'books', discount: 20 },
+                { id: 45, name: 'کتاب تاریخ ایران', price: '۳۵۰,۰۰۰', oldPrice: '۴۲۰,۰۰۰', icon: '📜', rating: 5, category: 'books', discount: 17 },
+                { id: 46, name: 'کتاب آشپزی ایرانی', price: '۱۸۰,۰۰۰', oldPrice: '۲۲۰,۰۰۰', icon: '👨‍🍳', rating: 4, category: 'books', discount: 18 },
+                { id: 47, name: 'کتاب روانشناسی', price: '۲۵۰,۰۰۰', oldPrice: '۳۰۰,۰۰۰', icon: '🧠', rating: 4, category: 'books', discount: 17 },
+                { id: 48, name: 'کتاب کودک و نوجوان', price: '۹۵,۰۰۰', oldPrice: '۱۲۰,۰۰۰', icon: '🧸', rating: 4, category: 'books', discount: 21 }
+            ]
+        };
+
+        let cart = [];
+        let currentCategory = 'all';
+        let currentProduct = {};
+        let displayedProducts = 12;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            setupEventListeners();
+            setupSearch();
+        });
+
+        function setupEventListeners() {
+            // Category filters
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    filterByCategory(category);
+                    
+                    // Update active state
+                    document.querySelectorAll('.category-item').forEach(cat => cat.classList.remove('category-active'));
+                    this.classList.add('category-active');
+                });
+            });
+
+            // Cart buttons
+            document.getElementById('cartBtn').addEventListener('click', showCart);
+            document.getElementById('floatingCartBtn').addEventListener('click', showCart);
+
+            // Sort and view options
+            document.getElementById('sortSelect').addEventListener('change', sortProducts);
+            document.getElementById('gridView').addEventListener('click', () => setView('grid'));
+            document.getElementById('listView').addEventListener('click', () => setView('list'));
+
+            // Load more button
+            document.getElementById('loadMoreBtn').addEventListener('click', loadMoreProducts);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchSuggestions = document.getElementById('searchSuggestions');
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                
+                if (query.length > 2) {
+                    const allProducts = Object.values(products).flat();
+                    const suggestions = allProducts.filter(product => 
+                        product.name.toLowerCase().includes(query)
+                    ).slice(0, 5);
+
+                    if (suggestions.length > 0) {
+                        searchSuggestions.innerHTML = suggestions.map(product => `
+                            <div class="p-3 hover:bg-gray-50 cursor-pointer border-b last:border-b-0" onclick="selectProduct(${product.id})">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">${product.icon}</span>
+                                    <div>
+                                        <div class="font-semibold">${product.name}</div>
+                                        <div class="text-sm text-red-500">${product.price} تومان</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                        searchSuggestions.classList.remove('hidden');
+                    } else {
+                        searchSuggestions.classList.add('hidden');
+                    }
+                } else {
+                    searchSuggestions.classList.add('hidden');
+                }
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                    searchSuggestions.classList.add('hidden');
+                }
+            });
+        }
+
+        function selectProduct(productId) {
+            const allProducts = Object.values(products).flat();
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                showProduct(product.name, product.price, product.icon, product);
+            }
+            document.getElementById('searchSuggestions').classList.add('hidden');
+            document.getElementById('searchInput').value = '';
+        }
+
+        function loadProducts(category = 'all') {
+            const productsGrid = document.getElementById('productsGrid');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            
+            loadingSpinner.classList.remove('hidden');
+            
+            setTimeout(() => {
+                let productsToShow = [];
+                
+                if (category === 'all') {
+                    productsToShow = Object.values(products).flat();
+                } else {
+                    productsToShow = products[category] || [];
+                }
+
+                const limitedProducts = productsToShow.slice(0, displayedProducts);
+                
+                productsGrid.innerHTML = limitedProducts.map(product => createProductCard(product)).join('');
+                
+                loadingSpinner.classList.add('hidden');
+                
+                // Update load more button visibility
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                if (limitedProducts.length >= productsToShow.length) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'block';
+                }
+            }, 500);
+        }
+
+        function createProductCard(product) {
+            return `
+                <div class="bg-white rounded-2xl p-6 card-hover cursor-pointer relative shadow-sm border border-gray-100" onclick="showProduct('${product.name}', '${product.price}', '${product.icon}', ${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                    ${product.discount ? `<div class="discount-badge">${product.discount}٪</div>` : ''}
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4">${product.icon}</div>
+                        <h3 class="font-bold text-lg mb-2 line-clamp-2">${product.name}</h3>
+                        <div class="flex items-center justify-center gap-2 mb-4">
+                            <span class="text-yellow-400">${'⭐'.repeat(product.rating)}</span>
+                            <span class="text-sm text-gray-500">(${Math.floor(Math.random() * 200) + 50} نظر)</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="text-center">
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="text-red-500 font-bold text-xl">${product.price}</span>
+                                <span class="text-sm">تومان</span>
+                            </div>
+                            ${product.oldPrice ? `<div class="text-sm text-gray-500 line-through">${product.oldPrice} تومان</div>` : ''}
+                        </div>
+                        <button class="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition-all font-semibold" onclick="event.stopPropagation(); addToCart('${product.name}', '${product.price}', '${product.icon}', ${product.id})">
+                            افزودن به سبد
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            displayedProducts = 12;
+            
+            const categoryTitle = document.getElementById('categoryTitle');
+            const categoryNames = {
+                'all': 'همه محصولات',
+                'mobile': 'گوشی موبایل',
+                'laptop': 'لپ‌تاپ و کامپیوتر',
+                'clothing': 'پوشاک و مد',
+                'home': 'خانه و آشپزخانه',
+                'beauty': 'زیبایی و سلامت',
+                'gaming': 'بازی و سرگرمی',
+                'sports': 'ورزش و تفریح',
+                'books': 'کتاب و لوازم تحریر'
+            };
+            
+            categoryTitle.textContent = categoryNames[category] || 'همه محصولات';
+            loadProducts(category);
+        }
+
+        function sortProducts() {
+            const sortValue = document.getElementById('sortSelect').value;
+            const productsGrid = document.getElementById('productsGrid');
+            const productCards = Array.from(productsGrid.children);
+            
+            // This is a simplified sort - in a real app, you'd sort the actual data
+            if (sortValue === 'price-low') {
+                showNotification('مرتب‌سازی بر اساس قیمت: کم به زیاد');
+            } else if (sortValue === 'price-high') {
+                showNotification('مرتب‌سازی بر اساس قیمت: زیاد به کم');
+            } else if (sortValue === 'rating') {
+                showNotification('مرتب‌سازی بر اساس بالاترین امتیاز');
+            } else if (sortValue === 'newest') {
+                showNotification('مرتب‌سازی بر اساس جدیدترین');
+            }
+        }
+
+        function setView(viewType) {
+            const gridBtn = document.getElementById('gridView');
+            const listBtn = document.getElementById('listView');
+            const productsGrid = document.getElementById('productsGrid');
+            
+            if (viewType === 'grid') {
+                gridBtn.classList.add('bg-red-500', 'text-white');
+                gridBtn.classList.remove('hover:bg-gray-100');
+                listBtn.classList.remove('bg-red-500', 'text-white');
+                listBtn.classList.add('hover:bg-gray-100');
+                productsGrid.className = 'product-grid';
+            } else {
+                listBtn.classList.add('bg-red-500', 'text-white');
+                listBtn.classList.remove('hover:bg-gray-100');
+                gridBtn.classList.remove('bg-red-500', 'text-white');
+                gridBtn.classList.add('hover:bg-gray-100');
+                productsGrid.className = 'space-y-4';
+            }
+        }
+
+        function loadMoreProducts() {
+            displayedProducts += 12;
+            loadProducts(currentCategory);
+        }
+
+        function showProduct(name, price, icon, productData) {
+            currentProduct = productData || { name, price, icon };
+            
+            document.getElementById('modalTitle').textContent = name;
+            document.getElementById('modalIcon').textContent = icon;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalOldPrice').textContent = productData?.oldPrice || '';
+            
+            document.getElementById('modalAddToCart').onclick = () => addToCart(name, price, icon, productData?.id);
+            
+            // Load related products
+            loadRelatedProducts(productData?.category || 'mobile');
+            
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function loadRelatedProducts(category) {
+            const relatedContainer = document.getElementById('relatedProducts');
+            const categoryProducts = products[category] || [];
+            const relatedProducts = categoryProducts.slice(0, 4);
+            
+            relatedContainer.innerHTML = relatedProducts.map(product => `
+                <div class="bg-gray-50 rounded-xl p-4 card-hover cursor-pointer" onclick="showProduct('${product.name}', '${product.price}', '${product.icon}', ${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">${product.icon}</div>
+                        <h4 class="font-semibold text-sm mb-2 line-clamp-2">${product.name}</h4>
+                        <div class="text-red-500 font-bold text-sm">${product.price} تومان</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        function addToCart(name, price, icon, productId) {
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ 
+                    id: productId || Date.now(), 
+                    name, 
+                    price, 
+                    icon, 
+                    quantity: 1 
+                });
+            }
+            
+            updateCartCount();
+            closeModal();
+            showNotification(`${name} به سبد خرید اضافه شد! 🛒`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+            document.getElementById('floatingCartCount').textContent = totalItems;
+            
+            // Add bounce animation
+            const cartElements = [document.getElementById('cartCount'), document.getElementById('floatingCartCount')];
+            cartElements.forEach(element => {
+                element.classList.add('bounce-in');
+                setTimeout(() => element.classList.remove('bounce-in'), 600);
+            });
+        }
+
+        function showCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartSummary = document.getElementById('cartSummary');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🛒</div>
+                        <p class="text-gray-500 text-lg">سبد خرید شما خالی است</p>
+                        <button onclick="closeCartModal()" class="mt-4 text-red-500 hover:text-red-600 font-semibold">ادامه خرید</button>
+                    </div>
+                `;
+                cartSummary.classList.add('hidden');
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between p-6 border border-gray-200 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-3xl">${item.icon}</span>
+                            <div>
+                                <h4 class="font-bold text-lg">${item.name}</h4>
+                                <div class="flex items-center gap-4 mt-2">
+                                    <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">-</button>
+                                    <span class="font-semibold">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <div class="font-bold text-red-500 text-lg">${item.price} تومان</div>
+                            <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 text-sm mt-2">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                cartSummary.classList.remove('hidden');
+                // In a real app, you'd calculate the actual total
+                document.getElementById('subtotal').textContent = 'محاسبه در حال انجام...';
+                document.getElementById('totalAmount').textContent = 'محاسبه در حال انجام...';
+            }
+            
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        function updateQuantity(itemId, change) {
+            const item = cart.find(item => item.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemId);
+                } else {
+                    updateCartCount();
+                    showCart(); // Refresh cart display
+                }
+            }
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartCount();
+            showCart(); // Refresh cart display
+            showNotification('محصول از سبد خرید حذف شد');
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            const productModal = document.getElementById('productModal');
+            const cartModal = document.getElementById('cartModal');
+            
+            if (e.target === productModal) {
+                closeModal();
+            }
+            if (e.target === cartModal) {
+                closeCartModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f70f3043ab218e',t:'MTc1NTI0Mzc4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
